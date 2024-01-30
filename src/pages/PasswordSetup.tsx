@@ -37,12 +37,13 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
 
     // const encryptionManager = useContext(EncryptionManagerContext);
 
-    useTelegramMainButton(async ()=>{
-        if(await handleSubmit()){
-            return true;
-        } else {
+    useTelegramMainButton(()=>{
+        handleSubmit().then(result => {
+            return result;
+        }).catch(error => {
+            console.error("Error in handleSubmit:", error);
             return false;
-        }
+        });
         // encryptionManager?.createPassword(password);
 
         return true;

@@ -5,10 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run generate && tsc && vite build",
+    "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "generate": "npx mkdirp src/migration/proto/generated && pbjs -t static-module -w es6 src/migration/proto/migration.proto -o src/migration/proto/generated/migration.js && pbts -o src/migration/proto/generated/migration.d.ts src/migration/proto/generated/migration.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
