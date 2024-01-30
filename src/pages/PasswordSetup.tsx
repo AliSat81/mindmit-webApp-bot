@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import {FC, useEffect, useState} from "react"; //useContext
+import {FC, useState} from "react"; //useContext
 import {Stack, Typography} from "@mui/material";
 import Login from "../assets/login_lottie.json";
 import useTelegramMainButton from "../hooks/telegram/useTelegramMainButton.ts";
@@ -29,7 +29,7 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     // const { executeRecaptcha } = useGoogleReCaptcha();
-    const [, setGToken] = useState<string | null>(""); 
+    // const [, setGToken] = useState<string | null>(""); 
     // const [, setIsSubmitting] = useState(false);
     const { impactOccurred, notificationOccurred } = useTelegramHaptics();
     // const navigate = useNavigate();
@@ -53,7 +53,7 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     const handleSubmit = () => {
         impactOccurred("medium");
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-        window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel ${window.Telegram.WebAppUser.first_name} 🍾`},()=>{
+        window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel ${window.Telegram?.WebAppUser?.first_name || ""} 🍾`},()=>{
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
             window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
             notificationOccurred("success");
@@ -99,23 +99,23 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
         //     }
     }
 
-    const handleLoaded = () => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unnecessary-condition
-        window?.grecaptcha?.ready(() => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-            window.grecaptcha.execute(process.env.GOOGLE_CAPTCHA_SECRET, { action: "homepage" }).then((token: string | null) => {
-            setGToken(token);
-            });
-        });
-    };
+    // const handleLoaded = () => {
+    //     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unnecessary-condition
+    //     window?.grecaptcha?.ready(() => {
+    //         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    //         window.grecaptcha.execute(process.env.GOOGLE_CAPTCHA_SECRET, { action: "homepage" }).then((token: string | null) => {
+    //         setGToken(token);
+    //         });
+    //     });
+    // };
 
-    useEffect(() => {
-        // Add reCaptcha
-        const script = document.createElement("script");
-        script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.GOOGLE_CAPTCHA_SECRET}`;
-        script.addEventListener("load", handleLoaded);
-        document.body.appendChild(script);
-    }, []);
+    // useEffect(() => {
+    //     // Add reCaptcha
+    //     const script = document.createElement("script");
+    //     script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.GOOGLE_CAPTCHA_SECRET}`;
+    //     script.addEventListener("load", handleLoaded);
+    //     document.body.appendChild(script);
+    // }, []);
     
     return <>
         <Stack spacing={2} alignItems="center">
