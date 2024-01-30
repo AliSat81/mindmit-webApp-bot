@@ -53,7 +53,10 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     const handleSubmit = async () => {
         impactOccurred("light");
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-        window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
+        window.Telegram.WebApp.showPopup({message: "Welcome to our chaneel."},()=>{
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+            window.Telegram.WebApp.openTelegramLink(`https://t.me/jadivarlogs`);
+        });
         if (!executeRecaptcha) return false;
             const gToken = await executeRecaptcha();
             try {
@@ -120,8 +123,7 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     return <>
         <Stack spacing={2} alignItems="center">
             <LottieAnimation
-                initialSegment={[105, 285]}
-                animationData={Login}
+                animationData={Login}  
             />
             <Typography variant="h5" fontWeight="bold" align="center">
                 Password setup
