@@ -1,7 +1,7 @@
 import {createContext, FC, PropsWithChildren, useContext, useEffect, useState} from "react";
 import {EncryptionManagerContext} from "./encryption.tsx";
 import {Color, Icon} from "../globals.tsx";
-import decodeGoogleAuthenticator from "../migration/import.ts";
+// import decodeGoogleAuthenticator from "../migration/import.ts";
 
 export interface Account {
     id: string;
@@ -122,7 +122,7 @@ export const StorageManagerProvider: FC<PropsWithChildren> = ({children}) => {
         });
     }, [accounts, encryptionManager, keyChanged]);
 
-    const [imported, setImported] = useState(false);
+    const [imported] = useState(false);
     useEffect(() => {
         if(!ready || imported) return;
 
@@ -131,13 +131,13 @@ export const StorageManagerProvider: FC<PropsWithChildren> = ({children}) => {
 
         const url = new URL("otpauth-migration://offline");
         url.searchParams.set("data", param)
-        const accounts = decodeGoogleAuthenticator(url.toString());
-        if(!accounts) return;
+        // const accounts = decodeGoogleAuthenticator(url.toString());
+        // if(!accounts) return;
 
-        const uris = Object.values(storageManager.accounts).map(a => a.uri);
+        // const uris = Object.values(storageManager.accounts).map(a => a.uri);
 
-        storageManager.saveAccounts(accounts.filter(account => !uris.includes(account.uri)));
-        setImported(true);
+        // storageManager.saveAccounts(accounts.filter(account => !uris.includes(account.uri)));
+        // setImported(true);
     }, [ready, imported, storageManager]);
 
     return <StorageManagerContext.Provider value={storageManager}>
