@@ -39,7 +39,7 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
     // const encryptionManager = useContext(EncryptionManagerContext);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    window.Telegram.WebApp.ScanQrPopupParams("HELLO","HERE WE ARE");
+    window.Telegram.WebApp.showPopup("HELLO","HERE WE ARE");
 
     useTelegramMainButton(()=>{
         let stat : boolean | undefined= false;
