@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {FC, useState} from "react"; //useContext
-import {Stack, Typography} from "@mui/material";
+import {Link, Stack, Theme, Typography, useTheme} from "@mui/material";
 import Login from "../assets/login_lottie.json";
 import useTelegramMainButton from "../hooks/telegram/useTelegramMainButton.ts";
 // import {EncryptionManagerContext} from "../managers/encryption.tsx";
@@ -12,22 +12,19 @@ import LottieAnimation from "../components/LottieAnimation.tsx";
 import useTelegramHaptics from "../hooks/telegram/useTelegramHaptics.ts";
 // import axios from "axios";
 
-{/* <Typography color="text.secondary" fontSize="small" align="center" sx={{paddingY: theme.spacing(1)}}> */}
-{/* MindMint<br/>
-Version: {APP_VERSION}<br/>
-<Link color="inherit" target="_blank" rel="noopener" href={APP_HOMEPAGE}>
-    GitHub repository
-</Link>
-</Typography> */}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const window: any;
+interface CustomStyling {
+    paddingY?: Theme['spacing'];
+    // Add other styling properties as needed
+  }
 
 
 const PasswordSetup: FC<{change?: boolean}> = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
+    const theme = useTheme();
     // const { executeRecaptcha } = useGoogleReCaptcha();
     // const [, setGToken] = useState<string | null>(""); 
     // const [, setIsSubmitting] = useState(false);
@@ -153,6 +150,15 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
                 }}
             />
         </Stack>
+
+        <Typography color="text.secondary" variant="body2" align="center" sx={{ paddingY: theme.spacing(1) as CustomStyling}}>
+        You don&apos;t have an account?<br/>
+        <Link color="inherit" target="_blank" rel="noopener" href={"https://dev.mindmint.life/auth/register"}>
+        <strong>Sign Up</strong> now
+    </Link>
+</Typography>
+
+
     </>;
 }
 
