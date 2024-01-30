@@ -38,15 +38,14 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
     // const encryptionManager = useContext(EncryptionManagerContext);
 
     useTelegramMainButton(()=>{
+        let stat : boolean | undefined= false;
         handleSubmit().then(result => {
-            return result;
-        }).catch(error => {
-            console.error("Error in handleSubmit:", error);
-            return false;
+            stat = result;
+        }).catch(() => {
+            stat =  false;
         });
+        return !!stat
         // encryptionManager?.createPassword(password);
-
-        return true;
     }, "Login");
 
     const handleSubmit = async () => {
@@ -110,11 +109,10 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
     }, []);
 
     const isValidEmail = (email: string): boolean => {
-        // Regular expression for a basic email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    };
-
+        const emailRegex = /[^@]+@[^@]+\.[^@]+/;
+        return emailRegex.test(email);  
+      };
+    
     return <>
         <Stack spacing={2} alignItems="center">
             <LottieAnimation
