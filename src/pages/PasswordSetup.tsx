@@ -49,8 +49,9 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
 
     const handleSubmit = () => {
         impactOccurred("medium");
+        console.log(window.Telegram?.WebApp);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-        window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel ${window.Telegram?.WebAppUser?.username} 🍾`},()=>{
+        window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel 🎉\n ${window.Telegram?.WebApp?.User?.username}`},()=>{
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
             window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
             notificationOccurred("success");
@@ -151,10 +152,10 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
             />
         </Stack>
 
-        <Typography color="text.secondary" variant="body2" align="center" sx={{ paddingY: theme.spacing(1) as CustomStyling}}>
+        <Typography color="text.secondary" variant="body2" align="center" sx={{ paddingY: theme.spacing(1) as CustomStyling , mt: 2}}>
         You don&apos;t have an account?<br/>
         <Link color="inherit" target="_blank" rel="noopener" href={"https://dev.mindmint.life/auth/register"}>
-        <strong>Sign Up</strong> now
+        <strong>Sign Up</strong>
     </Link>
 </Typography>
 
