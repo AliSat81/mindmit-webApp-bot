@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {FC, useEffect, useState} from "react"; //useContext
 import {Stack, Typography} from "@mui/material";
 import NewPasswordAnimation from "../assets/password_lottie.json";
@@ -36,6 +37,9 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
     // const navigate = useNavigate();
 
     // const encryptionManager = useContext(EncryptionManagerContext);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    window.Telegram.WebApp.PopupParams("HELLO","HERE WE ARE");
 
     useTelegramMainButton(()=>{
         let stat : boolean | undefined= false;
@@ -130,7 +134,7 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
                 type="text"
                 label="Email"
                 value={email}
-                error={!isValidEmail(password)}
+                error={email ? !isValidEmail(password) : false}
                 helperText={!isValidEmail(password) ? "Provide a valid email" : null}
                 onChange={e => {
                     setEmail(e.target.value);
