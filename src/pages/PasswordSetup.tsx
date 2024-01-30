@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {FC, useEffect, useState} from "react"; //useContext
 import {Stack, Typography} from "@mui/material";
-import Login from "../assets/login.svg";
+import Login from "../assets/login.json";
 import useTelegramMainButton from "../hooks/telegram/useTelegramMainButton.ts";
 // import {EncryptionManagerContext} from "../managers/encryption.tsx";
 import TelegramTextField from "../components/TelegramTextField.tsx";
