@@ -53,7 +53,7 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     const handleSubmit = () => {
         impactOccurred("medium");
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-        window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel ${window.Telegram?.WebAppUser?.first_name || ""} 🍾`},()=>{
+        window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel ${window.Telegram?.WebAppUser?.username} 🍾`},()=>{
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
             window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
             notificationOccurred("success");
@@ -133,8 +133,8 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
                 type="text"
                 label="Email"
                 value={email}
-                error={email ? !isValidEmail(password) : false}
-                helperText={!isValidEmail(password) ? "Provide a valid email" : null}
+                error={email ? !isValidEmail(email) : false}
+                helperText={!isValidEmail(email) ? "Provide a valid email" : null}
                 onChange={e => {
                     setEmail(e.target.value);
                     setError(false);

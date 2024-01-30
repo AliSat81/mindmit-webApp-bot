@@ -16,7 +16,7 @@ const LottieAnimation: FC<LottieProps> = ({animationData, initialSegment}) => {
         onClick={() => {
             if (lottie.current?.animationItem?.isPaused) lottie.current.goToAndPlay(0);
         }}
-        lottieRef={lottie} style={{width: '80%'}}
+        lottieRef={lottie} style={{width: '60%'}}
         initialSegment={initialSegment}
         animationData={animationData}
         autoplay={true}
