@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {FC, useEffect, useState} from "react"; //useContext
 import {Stack, Typography} from "@mui/material";
-import NewPasswordAnimation from "../assets/password_lottie.json";
-import ChangePasswordAnimation from "../assets/change_password_lottie.json";
+import Login from "../assets/login.svg";
 import useTelegramMainButton from "../hooks/telegram/useTelegramMainButton.ts";
 // import {EncryptionManagerContext} from "../managers/encryption.tsx";
 import TelegramTextField from "../components/TelegramTextField.tsx";
@@ -121,7 +120,7 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
         <Stack spacing={2} alignItems="center">
             <LottieAnimation
                 initialSegment={change ? [105, 285] : undefined}
-                animationData={change ? ChangePasswordAnimation : NewPasswordAnimation}
+                animationData={Login}
             />
             <Typography variant="h5" fontWeight="bold" align="center">
                 {change ? "Set new password" : "Password setup"}
