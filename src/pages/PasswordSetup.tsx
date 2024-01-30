@@ -49,7 +49,7 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
 
     const handleSubmit = () => {
         impactOccurred("medium");
-        console.log(window.Telegram?.WebApp);
+        console.log(window.Telegram);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel 🎉\n ${window.Telegram?.WebApp?.User?.username}`},()=>{
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
