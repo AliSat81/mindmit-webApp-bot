@@ -7,10 +7,10 @@ import useTelegramMainButton from "../hooks/telegram/useTelegramMainButton.ts";
 import TelegramTextField from "../components/TelegramTextField.tsx";
 import LottieAnimation from "../components/LottieAnimation.tsx";
 // import {useNavigate} from "react-router-dom";
-import bcrypt from "bcryptjs";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+// import bcrypt from "bcryptjs";
+// import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import useTelegramHaptics from "../hooks/telegram/useTelegramHaptics.ts";
-import axios from "axios";
+// import axios from "axios";
 
 {/* <Typography color="text.secondary" fontSize="small" align="center" sx={{paddingY: theme.spacing(1)}}> */}
 {/* MindMint<br/>
@@ -28,9 +28,9 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
-    const { executeRecaptcha } = useGoogleReCaptcha();
+    // const { executeRecaptcha } = useGoogleReCaptcha();
     const [, setGToken] = useState<string | null>(""); 
-    const [, setIsSubmitting] = useState(false);
+    // const [, setIsSubmitting] = useState(false);
     const { impactOccurred, notificationOccurred } = useTelegramHaptics();
     // const navigate = useNavigate();
 
