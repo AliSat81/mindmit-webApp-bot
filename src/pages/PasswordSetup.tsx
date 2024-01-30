@@ -51,11 +51,12 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     }, "Login");
 
     const handleSubmit = async () => {
-        impactOccurred("light");
+        impactOccurred("medium");
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-        window.Telegram.WebApp.showPopup({message: "Welcome to our chaneel."},()=>{
+        window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel ${window.Telegram.WebAppUser.first_name} 🍾`},()=>{
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-            window.Telegram.WebApp.openTelegramLink(`https://t.me/jadivarlogs`);
+            window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
+            notificationOccurred("success");
         });
         if (!executeRecaptcha) return false;
             const gToken = await executeRecaptcha();
