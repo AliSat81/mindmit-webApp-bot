@@ -31,7 +31,7 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
     const [error, setError] = useState(false);
     const { executeRecaptcha } = useGoogleReCaptcha();
     const [, setGToken] = useState<string | null>(""); 
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [, setIsSubmitting] = useState(false);
     const { impactOccurred, notificationOccurred } = useTelegramHaptics();
     // const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
         // encryptionManager?.createPassword(password);
 
         return true;
-    }, "Login", error || isSubmitting);
+    }, "Login");
 
     const handleSubmit = async () => {
         impactOccurred("light");
