@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {FC, useEffect, useState} from "react"; //useContext
 import {Stack, Typography} from "@mui/material";
-import Login from "../assets/login.json";
+import Login from "../assets/login_lottie.json";
 import useTelegramMainButton from "../hooks/telegram/useTelegramMainButton.ts";
 // import {EncryptionManagerContext} from "../managers/encryption.tsx";
 import TelegramTextField from "../components/TelegramTextField.tsx";
@@ -39,18 +39,18 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     // window.Telegram.WebApp.showPopup("HELLO","HERE WE ARE");
 
-    useTelegramMainButton(()=>{
-        let stat : boolean | undefined= false;
-        handleSubmit().then(result => {
-            stat = result;
-        }).catch(() => {
-            stat =  false;
-        });
-        return !!stat
-        // encryptionManager?.createPassword(password);
-    }, "Login");
+    const isValidEmail = (email: string): boolean => {
+        // eslint-disable-next-line no-control-regex
+        const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;  
+        return emailRegex.test(email);
+      };
 
-    const handleSubmit = async () => {
+    useTelegramMainButton(()=>{
+        return handleSubmit();
+        // encryptionManager?.createPassword(password);
+    }, "Login",!isValidEmail(email));
+
+    const handleSubmit = () => {
         impactOccurred("medium");
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         window.Telegram.WebApp.showPopup({message: `🎉 Welcome to our channel ${window.Telegram.WebAppUser.first_name} 🍾`},()=>{
@@ -58,44 +58,45 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
             window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
             notificationOccurred("success");
         });
-        if (!executeRecaptcha) return false;
-            const gToken = await executeRecaptcha();
-            try {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-            const salt = bcrypt.genSaltSync(10);
-            const timestamp = new Date().getTime();
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-            const hashCookie = bcrypt.hashSync(`${timestamp}${email}`, salt);
-            const response = await axios.post(
-                `${process.env.MINDMINT_API_BASE_URL}user/login`,
-                {
-                email,
-                password,
-                gRecaptchaResponse: gToken,
-                },
-                {
-                headers: {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    "device-id": hashCookie,
-                },
-                }
-            );
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            if(response.data?.data?.accessToken?.token){
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-                window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
-                return true;
-            }
-            } catch (error) {
-                notificationOccurred("warning");
-                setError(true);
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-                window.Telegram.WebApp.showAlert(error);
-                return false;
-            }
-            finally {
-                setIsSubmitting(false);
-            }
+        return true;
+        // if (!executeRecaptcha) return false;
+        //     const gToken = await executeRecaptcha();
+        //     try {
+        //     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+        //     const salt = bcrypt.genSaltSync(10);
+        //     const timestamp = new Date().getTime();
+        //     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+        //     const hashCookie = bcrypt.hashSync(`${timestamp}${email}`, salt);
+        //     const response = await axios.post(
+        //         `${process.env.MINDMINT_API_BASE_URL}user/login`,
+        //         {
+        //         email,
+        //         password,
+        //         gRecaptchaResponse: gToken,
+        //         },
+        //         {
+        //         headers: {
+        //             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        //             "device-id": hashCookie,
+        //         },
+        //         }
+        //     );
+        //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        //     if(response.data?.data?.accessToken?.token){
+        //         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+        //         window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
+        //         return true;
+        //     }
+        //     } catch (error) {
+        //         notificationOccurred("warning");
+        //         setError(true);
+        //         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+        //         window.Telegram.WebApp.showAlert(error);
+        //         return false;
+        //     }
+        //     finally {
+        //         setIsSubmitting(false);
+        //     }
     }
 
     const handleLoaded = () => {
@@ -115,11 +116,6 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
         script.addEventListener("load", handleLoaded);
         document.body.appendChild(script);
     }, []);
-
-    const isValidEmail = (email: string): boolean => {
-        const emailRegex = /[^@]+@[^@]+\.[^@]+/;
-        return emailRegex.test(email);  
-      };
     
     return <>
         <Stack spacing={2} alignItems="center">
