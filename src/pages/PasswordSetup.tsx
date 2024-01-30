@@ -12,7 +12,6 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import useTelegramHaptics from "../hooks/telegram/useTelegramHaptics.ts";
 import axios from "axios";
 
-//window.Telegram.WebApp.openTelegramLink(`https://t.me/${import.meta.env.VITE_BOT_USERNAME}?start=export`);
 {/* <Typography color="text.secondary" fontSize="small" align="center" sx={{paddingY: theme.spacing(1)}}> */}
 {/* MindMint<br/>
 Version: {APP_VERSION}<br/>
@@ -25,7 +24,7 @@ Version: {APP_VERSION}<br/>
 declare const window: any;
 
 
-const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
+const PasswordSetup: FC<{change?: boolean}> = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
@@ -53,6 +52,8 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
 
     const handleSubmit = async () => {
         impactOccurred("light");
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+        window.Telegram.WebApp.openTelegramLink(`https://t.me/BotFather`);
         if (!executeRecaptcha) return false;
             const gToken = await executeRecaptcha();
             try {
@@ -119,11 +120,11 @@ const PasswordSetup: FC<{change?: boolean}> = ({change = false}) => {
     return <>
         <Stack spacing={2} alignItems="center">
             <LottieAnimation
-                initialSegment={change ? [105, 285] : undefined}
+                initialSegment={[105, 285]}
                 animationData={Login}
             />
             <Typography variant="h5" fontWeight="bold" align="center">
-                {change ? "Set new password" : "Password setup"}
+                Password setup
             </Typography>
             <Typography variant="subtitle2" align="center">
                 Please enter your credential to procceed.
