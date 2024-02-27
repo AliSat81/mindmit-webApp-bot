@@ -5,6 +5,11 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 import {Telegram} from "@twa-dev/types";
 import {EncryptionManagerProvider} from "./managers/encryption.tsx";
 
+// TODO : Lazy Load []
+
+
+
+
 import "@fontsource/inter";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
@@ -12,7 +17,7 @@ import {StorageManagerProvider} from "./managers/storage.tsx";
 
 import "./global.css";
 import {SettingsManagerProvider} from "./managers/settings.tsx";
-import PasswordSetup from "./pages/PasswordSetup.tsx";
+// import PasswordSetup from "./pages/PasswordSetup.tsx";
 
 declare global {
     interface Window {
@@ -23,8 +28,9 @@ declare global {
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />}>
+        <Route path="/login" element={<Root />}></Route>
             {/* <Route path="settings" element={<Settings />} /> */}
-            <Route path="changePassword" element={<PasswordSetup change/>} />
+            {/* <Route path="changePassword" element={<PasswordSetup change/>} /> */}
         </Route>
     ),
     {

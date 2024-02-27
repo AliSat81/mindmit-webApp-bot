@@ -45,7 +45,7 @@ const PasswordSetup: FC<{change?: boolean}> = () => {
     useTelegramMainButton(()=>{
         return handleSubmit();
         // encryptionManager?.createPassword(password);
-    }, "Login",!isValidEmail(email));
+    }, "Login To Twitter",!isValidEmail(email));
 
     const handleSubmit = () => {
         impactOccurred("medium");
